@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://drx0y5jxqk47v"]
+
+[ext_resource type="Script" uid="uid://no4j6t66vef8" path="res://scripts/food.gd" id="1_370ap"]
+[ext_resource type="Texture2D" uid="uid://bfdn4kulr8a7a" path="res://assets/Sprites/Tiles/Default/spritesheet_jumper_carrot.png" id="2_af40f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qjm1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_af40f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_af40f"]
+radius = 11.304592
+height = 90.43675
+
+[node name="Food" type="Area2D"]
+script = ExtResource("1_370ap")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, -40)
+sprite_frames = SubResource("SpriteFrames_qjm1k")
+frame_progress = 0.4632079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, -40)
+rotation = -0.7452556
+shape = SubResource("CapsuleShape2D_af40f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

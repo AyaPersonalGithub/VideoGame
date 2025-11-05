@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3170dp2g74xg"]
+
+[ext_resource type="Texture2D" uid="uid://dr0bya5mvrg0d" path="res://assets/Sprites/Tiles/Default/heart.png" id="1_ahhtf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oo0fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ahhtf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 58.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Heart bar" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="hearts" type="TextureRect" parent="MarginContainer/Heart bar"]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/Heart bar/hearts"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+autoplay = "default"
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="MessageLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_right = 124.0
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "Well Done!"

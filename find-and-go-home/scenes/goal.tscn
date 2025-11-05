@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsnuh4jsw8khx"]
+
+[ext_resource type="Texture2D" uid="uid://b0sefgv7ukjkm" path="res://assets/Sprites/Tiles/Default/flag_red_a.png" id="1_sx1j4"]
+[ext_resource type="Script" uid="uid://b4m3yytfrvclu" path="res://scripts/goal.gd" id="1_w3gav"]
+[ext_resource type="Texture2D" uid="uid://clt5iycqwdu0d" path="res://assets/Sprites/Tiles/Default/flag_red_b.png" id="2_w3gav"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ghoj6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sx1j4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w3gav")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3gav"]
+size = Vector2(64, 56)
+
+[node name="Goal" type="Area2D"]
+z_index = 10
+script = ExtResource("1_w3gav")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, -32)
+sprite_frames = SubResource("SpriteFrames_ghoj6")
+autoplay = "default"
+frame_progress = 0.6188578
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, -36)
+shape = SubResource("RectangleShape2D_w3gav")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
