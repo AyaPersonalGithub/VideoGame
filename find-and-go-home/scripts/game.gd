@@ -6,10 +6,11 @@ var score_label
 
 var food_scene = preload("res://scenes/food.tscn")
 var goal_scene = preload("res://scenes/goal.tscn")
+var enemy_scene = preload("res://scenes/enemy.tscn")
 var tile_map_layer
 var goal
 @onready var food_container = $Foods
-#@onready var enemy_container = $Enemies
+@onready var enemy_container = $Enemies
 @onready var player = $Player
 @onready var hud = $HUD
 @onready var level_container = $Levels
@@ -17,7 +18,7 @@ var goal
 
 const COIN_ATLAS_COORDS = Vector2i(17, 8) # update this if needed
 const GOAL_ATLAS_COORDS = Vector2i(14, 9) # update this if needed
-
+const ENEMY_ATLAS_COORDS = Vector2i(12, 7) #source 2
 func unload_old_level() -> void:
 	#if tile_map_layer:
 		#tile_map_layer.queue_free()
@@ -31,6 +32,8 @@ func unload_old_level() -> void:
 		
 	for goal in goal_container.get_children():
 		goal.queue_free()
+	for enemy in enemy_container.get_children():
+		enemy.queue_free()
 	
 func _ready() -> void:		
 #	$Goal.goal_reached.connect(on_goal_reached)
@@ -71,6 +74,12 @@ func init_level(level: int) -> void:
 			goal.position = ground_map_layer.to_global(ground_map_layer.map_to_local(cell))
 			goal.goal_reached.connect(on_goal_reached)
 			ground_map_layer.set_cell(cell, -1)
+		elif ground_map_layer.get_cell_atlas_coords(cell) == ENEMY_ATLAS_COORDS:
+			var new_enemy = enemy_scene.instantiate()
+			enemy_container.add_child(new_enemy)
+			new_enemy.position = ground_map_layer.to_global(ground_map_layer.map_to_local(cell))
+			new_enemy.find_child("Killzone").player_killed.connect(_on_killzone_player_killed)
+			ground_map_layer.set_cell(cell, -1)	
 
 func on_goal_reached() -> void:
 	if level < 3:
@@ -88,4 +97,6 @@ func on_food_obtained() -> void:
 func _on_killzone_player_killed() -> void:
 	message_label.text = "Oh no >_< Game over!"
 	message_label.visible = true
+	#player.animated_sprite.play("hit")
+	get_tree().paused = true # pause the game
 #	$Sounds/DisappearSound.play()

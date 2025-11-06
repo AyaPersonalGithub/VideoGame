@@ -36,3 +36,5 @@ shape = SubResource("RectangleShape2D_gee14")
 [node name="Levels" parent="." instance=ExtResource("5_iywne")]
 
 [node name="Goal" parent="." instance=ExtResource("6_u5sy4")]
+
+[node name="Enemies" type="Node" parent="."]
