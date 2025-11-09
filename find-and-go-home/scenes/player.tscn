@@ -60,20 +60,21 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tuyoq"]
-radius = 64.0
-height = 128.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fjrip"]
+radius = 40.0
+height = 96.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 9
 script = ExtResource("1_fjrip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, -73.7)
-scale = Vector2(0.6, 0.6)
+position = Vector2(0, -56)
+scale = Vector2(0.56666666, 0.5477901)
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"jump"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -73.7)
-shape = SubResource("CapsuleShape2D_tuyoq")
+position = Vector2(0, -48)
+shape = SubResource("CapsuleShape2D_fjrip")

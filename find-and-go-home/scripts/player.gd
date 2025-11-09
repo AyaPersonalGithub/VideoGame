@@ -32,4 +32,6 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("walk")
 	else:
 		animated_sprite.play("idle")
+		
+	velocity.x += SPEED/2	
 	move_and_slide()

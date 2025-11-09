@@ -15,6 +15,7 @@ var goal
 @onready var hud = $HUD
 @onready var level_container = $Levels
 @onready var goal_container = $Goal
+@onready var boss = $Boss
 
 const COIN_ATLAS_COORDS = Vector2i(17, 8) # update this if needed
 const GOAL_ATLAS_COORDS = Vector2i(14, 9) # update this if needed
@@ -43,12 +44,14 @@ func _ready() -> void:
 	score_label = $HUD.find_child("ScoreLabel") as Label
 	init_level(level) # load level 1 at the beginning
 	$Killzone.player_killed.connect(_on_killzone_player_killed)
+	boss.find_child("Killzone").player_killed.connect(_on_killzone_player_killed)
 	
 func init_level(level: int) -> void:
 	# unload the old level
 	unload_old_level()
 	# reset player positiond
 	player.position = Vector2(0, 0)
+	boss.position = Vector2(-200, -200)
 	# load the new level
 	#tile_map_layer = load("res://scenes/levels/level%d.tscn" % level).instantiate()
 	#add_child(tile_map_layer)
@@ -95,8 +98,9 @@ func on_food_obtained() -> void:
 	print("Score: " + str(score))
 	
 func _on_killzone_player_killed() -> void:
+	print("receive player kill signal")
 	message_label.text = "Oh no >_< Game over!"
 	message_label.visible = true
-	#player.animated_sprite.play("hit")
+	player.animated_sprite.play("hit")
 	get_tree().paused = true # pause the game
 #	$Sounds/DisappearSound.play()

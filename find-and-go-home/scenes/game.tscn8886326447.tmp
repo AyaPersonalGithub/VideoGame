@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="7_u5sy4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
-distance = -148.0
+distance = -20.0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_yqjtg")
@@ -27,14 +27,11 @@ position_smoothing_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
 
-[node name="Boss" parent="." instance=ExtResource("7_gee14")]
-z_index = 9
-position = Vector2(-192, -256)
-
 [node name="Killzone" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(760, 496)
+position = Vector2(3248, 640)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-1664, -28)
 shape = SubResource("WorldBoundaryShape2D_p57ef")
 
 [node name="Levels" parent="." instance=ExtResource("5_iywne")]
@@ -44,3 +41,6 @@ shape = SubResource("WorldBoundaryShape2D_p57ef")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="CloudBackground" type="Parallax2D" parent="."]
+
+[node name="Boss" parent="." instance=ExtResource("7_gee14")]
+position = Vector2(-224, -264)

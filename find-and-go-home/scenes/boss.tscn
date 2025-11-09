@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnq2lm1v3m0r5"]
+
+[ext_resource type="Script" uid="uid://c5h28widvs2r" path="res://scenes/boss.gd" id="1_jncid"]
+[ext_resource type="Texture2D" uid="uid://cj6nppkkllddi" path="res://assets/Sprites/Enemies/Default/wingMan1.png" id="1_neq0i"]
+[ext_resource type="Texture2D" uid="uid://cuws3aakfqv0m" path="res://assets/Sprites/Enemies/Default/wingMan5.png" id="2_jncid"]
+[ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="4_qnbj4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qnbj4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_neq0i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jncid")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_neq0i"]
+radius = 1200.0
+height = 2400.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qnbj4"]
+radius = 56.0
+height = 112.0
+
+[node name="Boss" type="Node2D"]
+script = ExtResource("1_jncid")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qnbj4")
+autoplay = "default"
+frame_progress = 0.9974688
+
+[node name="detect_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_area"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_neq0i")
+
+[node name="Killzone" parent="." instance=ExtResource("4_qnbj4")]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qnbj4")
+debug_color = Color(0.8016555, 0.36573085, 0.54462284, 0.41960785)
+
+[connection signal="body_entered" from="detect_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="detect_area" to="." method="_on_detect_area_body_exited"]

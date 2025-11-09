@@ -32,7 +32,7 @@ z_index = 9
 position = Vector2(-192, -256)
 
 [node name="Killzone" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(760, 496)
+position = Vector2(776, 672)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_p57ef")
