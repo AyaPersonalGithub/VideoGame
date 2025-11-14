@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -1500.0
 @onready var animated_sprite = $AnimatedSprite2D
+var is_floating = false
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -14,6 +15,9 @@ func _physics_process(delta: float) -> void:
 	var is_ducking = false
 	if Input.is_action_pressed("duck"):
 		is_ducking = true
+	#if is_floating:
+		
+		
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 2 # make it fall faster
 	# Get the input direction and handle the movement/deceleration.
@@ -33,5 +37,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		animated_sprite.play("idle")
 		
-	velocity.x += SPEED/2	
+	#velocity.x += SPEED/2	
 	move_and_slide()

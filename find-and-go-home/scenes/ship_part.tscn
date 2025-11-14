@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7t1s1dl7hqqr"]
+
+[ext_resource type="Script" uid="uid://bkglmbeygd6qn" path="res://scripts/ship_part.gd" id="1_7q71k"]
+[ext_resource type="Texture2D" uid="uid://hal6ekms74mf" path="res://assets/Sprites/Tiles/gear.png" id="1_fpbo1"]
+[ext_resource type="Texture2D" uid="uid://b55efrsbdsx2f" path="res://assets/Sprites/Tiles/gear_rotate.png" id="2_33yt6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wwueh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fpbo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_33yt6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fpbo1"]
+radius = 32.984844
+
+[node name="ShipPart" type="Area2D"]
+script = ExtResource("1_7q71k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(40, -40)
+sprite_frames = SubResource("SpriteFrames_wwueh")
+autoplay = "default"
+frame_progress = 0.19148059
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(40, -40)
+shape = SubResource("CircleShape2D_fpbo1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

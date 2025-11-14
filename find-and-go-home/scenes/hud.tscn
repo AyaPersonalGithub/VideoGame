@@ -1,16 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3170dp2g74xg"]
+[gd_scene load_steps=5 format=3 uid="uid://b3170dp2g74xg"]
 
+[ext_resource type="Texture2D" uid="uid://doptvle4eonlt" path="res://assets/Sprites/Tiles/Default/hud_heart_empty.png" id="1_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://dr0bya5mvrg0d" path="res://assets/Sprites/Tiles/Default/heart.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://o0wmmij8p7i7" path="res://assets/Sprites/Tiles/Default/hud_heart.png" id="3_6fi6k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oo0fn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ahhtf")
+"texture": ExtResource("1_5ysmq")
 }],
 "loop": true,
-"name": &"default",
+"name": &"empty",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ahhtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6fi6k")
+}],
+"loop": true,
+"name": &"full",
+"speed": 3.0
 }]
 
 [node name="HUD" type="CanvasLayer"]
@@ -21,20 +34,9 @@ offset_top = 8.0
 offset_right = 112.0
 offset_bottom = 58.0
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 55
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
-
-[node name="Heart bar" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="hearts" type="TextureRect" parent="MarginContainer/Heart bar"]
-layout_mode = 2
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/Heart bar/hearts"]
-position = Vector2(-48, 16)
-sprite_frames = SubResource("SpriteFrames_oo0fn")
-autoplay = "default"
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
@@ -52,3 +54,59 @@ offset_bottom = 67.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
 text = "Well Done!"
+
+[node name="Heart_bar" type="HBoxContainer" parent="."]
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 164.0
+offset_bottom = 50.0
+
+[node name="hearts" type="TextureRect" parent="Heart_bar"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+animation = &"full"
+autoplay = "full"
+
+[node name="hearts2" type="TextureRect" parent="Heart_bar"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts2"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+animation = &"full"
+autoplay = "full"
+
+[node name="hearts3" type="TextureRect" parent="Heart_bar"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts3"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+animation = &"full"
+autoplay = "full"
+
+[node name="hearts4" type="TextureRect" parent="Heart_bar"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts4"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+animation = &"full"
+autoplay = "full"
+
+[node name="hearts5" type="TextureRect" parent="Heart_bar"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts5"]
+position = Vector2(-48, 16)
+sprite_frames = SubResource("SpriteFrames_oo0fn")
+animation = &"full"
+autoplay = "full"

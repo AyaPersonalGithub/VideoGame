@@ -21,10 +21,13 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_tuyoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
 }],
 "loop": true,
 "name": &"hit",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -65,15 +68,16 @@ radius = 40.0
 height = 96.0
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 9
+z_index = 10
 script = ExtResource("1_fjrip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -56)
 scale = Vector2(0.56666666, 0.5477901)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"jump"
+animation = &"idle"
 autoplay = "walk"
+frame_progress = 0.36507547
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -48)
