@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://2h8wls1u7c3k"]
+
+[ext_resource type="Texture2D" uid="uid://dsawgaew1eued" path="res://scenes/levels/panel_brown.png" id="1_pkx4w"]
+[ext_resource type="Script" uid="uid://bwmop11a1xvw2" path="res://scripts/dialog.gd" id="1_tmfn4"]
+[ext_resource type="Texture2D" uid="uid://ck64v3nsqcxy5" path="res://assets/UI/Double/button_brown.png" id="2_36pgd"]
+
+[sub_resource type="Theme" id="Theme_0a082"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_tmfn4"]
+
+[node name="Popup" type="CanvasLayer"]
+script = ExtResource("1_tmfn4")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="image" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0a082")
+texture = ExtResource("1_pkx4w")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 448.0
+offset_right = 56.0
+offset_bottom = 511.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.7343725, 0.92771393, 0.8306968, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_icons/icon = SubResource("ImageTexture_tmfn4")
+text = "OK"
+icon = ExtResource("2_36pgd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -424.0
+offset_top = -488.0
+offset_right = 432.0
+offset_bottom = -317.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.39887878, 0.4349893, 0.81374973, 1)
+theme_override_font_sizes/font_size = 40
+text = "Congraturation! 
+Find more gears in next level!
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

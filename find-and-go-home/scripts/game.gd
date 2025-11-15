@@ -24,6 +24,8 @@ var levelSegmentLength = 3200
 @onready var goal_container = $Goal
 @onready var boss = $Boss
 @onready var ship_parts_container = $ShipParts
+@onready var hearts_parent =$"HUD/Heart_bar"
+@onready var popup_dialog =$Popup
 
 var hearts_list : Array[TextureRect]
 var health = 5
@@ -40,8 +42,7 @@ func unload_old_level() -> void:
 #	for tile_map_layer.get_children():
 #		print("tilemap has child")
 	for food in food_container.get_children():
-		food.queue_free()
-		
+		food.queue_free()		
 	for goal in goal_container.get_children():
 		goal.queue_free()
 	for enemy in enemy_container.get_children():
@@ -58,7 +59,11 @@ func _ready() -> void:
 	init_level(currentlevel) # load level 1 at the beginning
 	$Killzone.player_damaged.connect(_on_killzone_player_killed)
 	#boss.find_child("Killzone").player_damaged.connect(_on_killzone_player_killed)
-	boss.player_catched.connect(_on_killzone_player_killed)
+	boss.player_catched.connect(_on_killzone_player_killed)	
+	#show health_bar
+	for child in hearts_parent.get_children():
+		hearts_list.append(child)
+	popup_dialog.continue_button_pressed.connect(on_popup_button_pressed)
 
 func spawm_inst(x, y, level):
 	var id = randi() % len(segments)
@@ -108,10 +113,6 @@ func init_level(level: int) -> void:
 	score = 0
 	spawm_inst(0,0,currentlevel)
 	spawm_inst(levelSegmentLength,0,currentlevel)
-	#show health_bar
-	var hearts_parent =$"HUD/Heart_bar"
-	for child in hearts_parent.get_children():
-		hearts_list.append(child)
 
 func _physics_process(delta: float) -> void:
 	for level in level_container.get_children():
@@ -134,16 +135,14 @@ func _physics_process(delta: float) -> void:
 		#reset player y position
 		player.position.y = -100
 		_on_killzone_player_killed()
-	if score >=2:
-		on_goal_reached()
-		score = 0
-		print("collet gears and move to next level")
 
 	
 func on_goal_reached() -> void:
 	if currentlevel < 3:
 		currentlevel += 1
-		init_level(currentlevel)
+		#init_level(currentlevel)		
+		popup_dialog.visible = true
+		get_tree().paused = true
 	else:
 		message_label.text = "Congrats! Well done!"
 		message_label.visible = true
@@ -154,6 +153,10 @@ func on_food_obtained() -> void:
 
 func on_gear_obtained() ->void:	
 	score += 1	
+	if score >=2:
+		score = 0
+		on_goal_reached()
+		print("collet gears and move to next level")		
 	score_label.text = "Score: " + str(score)
 	print("Score: " + str(score))
 	
@@ -176,3 +179,8 @@ func _on_killzone_player_killed() -> void:
 func update_heart_display():
 	for i in range(hearts_list.size()):
 		hearts_list[i].visible = i <health
+		
+func on_popup_button_pressed():
+	print("get continue button signal")
+	popup_dialog.visible = false
+	init_level(currentlevel)

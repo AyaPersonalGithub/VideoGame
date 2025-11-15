@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://ccte81yoyk0vv"]
 
-[ext_resource type="Texture2D" uid="uid://clfhktb2777sp" path="res://assets/Sprites/Enemies/Default/slime_fire_walk_a.png" id="1_4ra3w"]
 [ext_resource type="Script" uid="uid://vb4r5iawckvo" path="res://scripts/enemy.gd" id="1_5uy6h"]
-[ext_resource type="Texture2D" uid="uid://c78rb4nxohfmd" path="res://assets/Sprites/Enemies/Default/slime_fire_walk_b.png" id="2_5uy6h"]
+[ext_resource type="Texture2D" uid="uid://2j1l6f2ejwix" path="res://assets/Sprites/Enemies/Extra/frog.png" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="3_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://bk6ip7bcygxp2" path="res://assets/Sprites/Enemies/Extra/frog_leap.png" id="3_c4w8v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5uy6h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4ra3w")
+"texture": ExtResource("2_5uy6h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_5uy6h")
+"texture": ExtResource("3_c4w8v")
 }],
 "loop": true,
 "name": &"default",
@@ -29,7 +29,7 @@ script = ExtResource("1_5uy6h")
 position = Vector2(0, 5)
 sprite_frames = SubResource("SpriteFrames_5uy6h")
 autoplay = "default"
-frame_progress = 0.72090816
+frame_progress = 0.59997815
 
 [node name="Killzone" parent="." instance=ExtResource("3_4ra3w")]
 position = Vector2(0, 0)

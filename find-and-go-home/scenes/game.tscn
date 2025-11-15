@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://f6ky3pyyj0ir"]
+[gd_scene load_steps=10 format=3 uid="uid://f6ky3pyyj0ir"]
 
 [ext_resource type="Script" uid="uid://ci2avfxq2u1u2" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bjyd0866r8jcp" path="res://scenes/player.tscn" id="2_lnu2h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsnuh4jsw8khx" path="res://scenes/goal.tscn" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bnq2lm1v3m0r5" path="res://scenes/boss.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://2h8wls1u7c3k" path="res://scenes/dialog.tscn" id="8_gee14"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 distance = -148.0
@@ -51,3 +52,7 @@ position = Vector2(296, -24)
 scroll_offset = Vector2(296, -24)
 
 [node name="ShipParts" type="Node" parent="."]
+
+[node name="Popup" parent="." instance=ExtResource("8_gee14")]
+process_mode = 3
+visible = false
