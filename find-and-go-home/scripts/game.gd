@@ -25,7 +25,7 @@ var levelSegmentLength = 3200
 @onready var boss = $Boss
 @onready var ship_parts_container = $ShipParts
 @onready var hearts_parent =$"HUD/Heart_bar"
-@onready var popup_dialog =$Popup
+@onready var levelup_dialog =$LevelupDialog
 
 var hearts_list : Array[TextureRect]
 var health = 5
@@ -51,9 +51,6 @@ func unload_old_level() -> void:
 		ship_part.queue_free()
 	
 func _ready() -> void:		
-#	$Goal.goal_reached.connect(on_goal_reached)
-#	for food in $Foods.get_children():
-#		food.food_obtained.connect(on_food_obtained)	
 	message_label = $HUD.find_child("MessageLabel") as Label
 	score_label = $HUD.find_child("ScoreLabel") as Label
 	init_level(currentlevel) # load level 1 at the beginning
@@ -63,7 +60,7 @@ func _ready() -> void:
 	#show health_bar
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)
-	popup_dialog.continue_button_pressed.connect(on_popup_button_pressed)
+	levelup_dialog.continue_button_pressed.connect(on_levelup_button_pressed)
 
 func spawm_inst(x, y, level):
 	var id = randi() % len(segments)
@@ -141,7 +138,7 @@ func on_goal_reached() -> void:
 	if currentlevel < 3:
 		currentlevel += 1
 		#init_level(currentlevel)		
-		popup_dialog.visible = true
+		levelup_dialog.visible = true
 		get_tree().paused = true
 	else:
 		message_label.text = "Congrats! Well done!"
@@ -180,7 +177,6 @@ func update_heart_display():
 	for i in range(hearts_list.size()):
 		hearts_list[i].visible = i <health
 		
-func on_popup_button_pressed():
-	print("get continue button signal")
-	popup_dialog.visible = false
+func on_levelup_button_pressed():
+	levelup_dialog.visible = false
 	init_level(currentlevel)

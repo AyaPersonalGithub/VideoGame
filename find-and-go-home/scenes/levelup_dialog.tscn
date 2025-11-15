@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://2h8wls1u7c3k"]
 
+[ext_resource type="Script" uid="uid://bwmop11a1xvw2" path="res://scripts/levelup_dialog.gd" id="1_gxg2q"]
 [ext_resource type="Texture2D" uid="uid://dsawgaew1eued" path="res://scenes/levels/panel_brown.png" id="1_pkx4w"]
-[ext_resource type="Script" uid="uid://bwmop11a1xvw2" path="res://scripts/dialog.gd" id="1_tmfn4"]
 [ext_resource type="Texture2D" uid="uid://ck64v3nsqcxy5" path="res://assets/UI/Double/button_brown.png" id="2_36pgd"]
 
 [sub_resource type="Theme" id="Theme_0a082"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_tmfn4"]
 
-[node name="Popup" type="CanvasLayer"]
-script = ExtResource("1_tmfn4")
+[node name="LevelupDialog" type="CanvasLayer"]
+script = ExtResource("1_gxg2q")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 8
