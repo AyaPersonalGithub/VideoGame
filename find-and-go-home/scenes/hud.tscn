@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3170dp2g74xg"]
+[gd_scene load_steps=9 format=3 uid="uid://b3170dp2g74xg"]
 
+[ext_resource type="Script" uid="uid://bro12nktdbewp" path="res://scripts/hud.gd" id="1_5pdws"]
 [ext_resource type="Texture2D" uid="uid://doptvle4eonlt" path="res://assets/Sprites/Tiles/Default/hud_heart_empty.png" id="1_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://dr0bya5mvrg0d" path="res://assets/Sprites/Tiles/Default/heart.png" id="1_ahhtf"]
 [ext_resource type="Texture2D" uid="uid://o0wmmij8p7i7" path="res://assets/Sprites/Tiles/Default/hud_heart.png" id="3_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://dsawgaew1eued" path="res://scenes/levels/panel_brown.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://cahpb6ftnr7s3" path="res://assets/UI/Double/button_red.png" id="5_047uy"]
+[ext_resource type="Texture2D" uid="uid://dxs0iairw2sg6" path="res://assets/UI/Double/button_grey.png" id="6_047uy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oo0fn"]
 animations = [{
@@ -27,6 +31,7 @@ animations = [{
 }]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_5pdws")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = 72.0
@@ -110,3 +115,87 @@ position = Vector2(-48, 16)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
+
+[node name="Quit" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 1120.0
+offset_bottom = 612.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TextureRect" type="TextureRect" parent="Quit/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("4_uo2fv")
+
+[node name="Label" type="Label" parent="Quit"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = 376.0
+offset_top = 160.0
+offset_right = 776.0
+offset_bottom = 215.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.28199008, 0.34452456, 0.6479436, 1)
+theme_override_font_sizes/font_size = 40
+text = "Do you want to quit?"
+
+[node name="YesButton" type="Button" parent="Quit"]
+clip_contents = true
+layout_direction = 1
+layout_mode = 0
+offset_left = 648.0
+offset_top = 416.0
+offset_right = 864.0
+offset_bottom = 512.0
+theme_override_font_sizes/font_size = 24
+text = "Quit
+"
+icon = ExtResource("5_047uy")
+flat = true
+autowrap_trim_flags = 0
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="NoButton" type="Button" parent="Quit"]
+clip_contents = true
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 276.0
+offset_top = 368.0
+offset_right = 468.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Continue"
+icon = ExtResource("6_047uy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Quit/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="Quit/NoButton" to="." method="_on_no_button_pressed"]

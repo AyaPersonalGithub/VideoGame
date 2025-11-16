@@ -30,8 +30,10 @@ position_smoothing_enabled = true
 [node name="Foods" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
+process_mode = 3
 
 [node name="Boss" parent="." instance=ExtResource("7_gee14")]
+visible = false
 z_index = 9
 position = Vector2(104, -280)
 

@@ -7,6 +7,7 @@ var map_move_speed = 50
 var food_scene = preload("res://scenes/food.tscn")
 var goal_scene = preload("res://scenes/goal.tscn")
 var enemy_scene = preload("res://scenes/enemy.tscn")
+var enemy2_scene = preload("res://scenes/enemy_2.tscn")
 var ship_part_scene = preload("res://scenes/ship_part.tscn")
 var tile_map_layer
 var goal
@@ -32,6 +33,7 @@ var health = 5
 const COIN_ATLAS_COORDS = Vector2i(17, 8) # update this if needed
 const GOAL_ATLAS_COORDS = Vector2i(14, 9) # update this if needed
 const ENEMY_ATLAS_COORDS = Vector2i(12, 7) #source 2
+const ENEMY2_ATLAS_COORDS = Vector2i(12, 4) #source 2
 const GEAR_ATLAS_COORDS = Vector2i(10, 5) #source 2
 func unload_old_level() -> void:
 	#if tile_map_layer:
@@ -56,7 +58,7 @@ func _ready() -> void:
 	init_level(currentlevel) # load level 1 at the beginning
 	$Killzone.player_damaged.connect(_on_killzone_player_killed)
 	#boss.find_child("Killzone").player_damaged.connect(_on_killzone_player_killed)
-	boss.player_catched.connect(_on_killzone_player_killed)	
+	#boss.player_catched.connect(_on_killzone_player_killed)	
 	#show health_bar
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)
@@ -89,6 +91,12 @@ func spawm_inst(x, y, level):
 			ground_map_layer.set_cell(cell, -1)
 		elif ground_map_layer.get_cell_atlas_coords(cell) == ENEMY_ATLAS_COORDS:
 			var new_enemy = enemy_scene.instantiate()
+			enemy_container.add_child(new_enemy)
+			new_enemy.position = ground_map_layer.to_global(ground_map_layer.map_to_local(cell))
+			new_enemy.find_child("Killzone").player_damaged.connect(_on_killzone_player_killed)
+			ground_map_layer.set_cell(cell, -1)		
+		elif ground_map_layer.get_cell_atlas_coords(cell) == ENEMY2_ATLAS_COORDS:
+			var new_enemy = enemy2_scene.instantiate()
 			enemy_container.add_child(new_enemy)
 			new_enemy.position = ground_map_layer.to_global(ground_map_layer.map_to_local(cell))
 			new_enemy.find_child("Killzone").player_damaged.connect(_on_killzone_player_killed)
