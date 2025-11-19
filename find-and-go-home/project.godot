@@ -11,9 +11,16 @@ config_version=5
 [application]
 
 config/name="Find and Go Home"
-run/main_scene="uid://f6ky3pyyj0ir"
+run/main_scene="uid://clcfumb7xct58"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+
+[autoload]
+
+Highscores="*res://scenes/highscores.tscn"
 
 [input]
 

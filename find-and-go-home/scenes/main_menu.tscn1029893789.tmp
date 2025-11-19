@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://clcfumb7xct58"]
+
+[ext_resource type="Script" uid="uid://bqrr2m1ycixw8" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="VideoStream" uid="uid://kuyhpraayoqy" path="res://assets/UI/startIntro.ogv" id="1_l6cm7"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ekxnf")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -368.0
+offset_top = -248.0
+offset_right = 352.0
+offset_bottom = 232.0
+stream = ExtResource("1_l6cm7")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = -128.0
+offset_top = 176.0
+offset_right = 200.0
+offset_bottom = 280.0
+text = "Start game!"
+
+[connection signal="pressed" from="StartButton" to="VideoStreamPlayer" method="_on_start_button_pressed"]

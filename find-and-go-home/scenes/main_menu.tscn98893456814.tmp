@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://clcfumb7xct58"]
+
+[ext_resource type="Script" uid="uid://bm5fnwqb0pq7a" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="VideoStream" uid="uid://kuyhpraayoqy" path="res://assets/UI/startIntro.ogv" id="1_l6cm7"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ekxnf")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -368.0
+offset_top = -248.0
+offset_right = 352.0
+offset_bottom = 232.0
+stream = ExtResource("1_l6cm7")
+
+[node name="Camera2D" type="Camera2D" parent="."]

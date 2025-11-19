@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://f6ky3pyyj0ir"]
+
+[ext_resource type="Script" uid="uid://ci2avfxq2u1u2" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bjyd0866r8jcp" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bgnc6lnnfdgc" path="res://scenes/levels.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://b3170dp2g74xg" path="res://scenes/hud.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dsnuh4jsw8khx" path="res://scenes/goal.tscn" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bnq2lm1v3m0r5" path="res://scenes/boss.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://2h8wls1u7c3k" path="res://scenes/levelup_dialog.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://k4dhs2bqcruq" path="res://scenes/story_intro.tscn" id="9_0tnpc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
+distance = -148.0
+
+[node name="Game" type="Node"]
+script = ExtResource("1_yqjtg")
+
+[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+position = Vector2(296, -88)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -96)
+limit_left = -10001171
+limit_top = -10000005
+limit_right = 9998829
+limit_bottom = 600
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="Foods" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("6_p57ef")]
+process_mode = 3
+
+[node name="Boss" parent="." instance=ExtResource("7_gee14")]
+z_index = 9
+position = Vector2(104, -280)
+
+[node name="Killzone" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(760, 496)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_p57ef")
+
+[node name="Levels" parent="." instance=ExtResource("5_iywne")]
+
+[node name="Goal" parent="." instance=ExtResource("6_u5sy4")]
+position = Vector2(296, -24)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="CloudBackground" type="Parallax2D" parent="."]
+scroll_offset = Vector2(296, -24)
+
+[node name="ShipParts" type="Node" parent="."]
+
+[node name="LevelupDialog" parent="." instance=ExtResource("8_gee14")]
+process_mode = 3
+visible = false
+
+[node name="StoryIntro" parent="." instance=ExtResource("9_0tnpc")]

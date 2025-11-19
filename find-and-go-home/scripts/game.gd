@@ -9,6 +9,7 @@ var goal_scene = preload("res://scenes/goal.tscn")
 var enemy_scene = preload("res://scenes/enemy.tscn")
 var enemy2_scene = preload("res://scenes/enemy_2.tscn")
 var ship_part_scene = preload("res://scenes/ship_part.tscn")
+var game_over_scene = preload("res://scenes/game_over.tscn")
 var tile_map_layer
 var goal
 var segments = [
@@ -29,7 +30,7 @@ var levelSegmentLength = 3200
 @onready var levelup_dialog =$LevelupDialog
 
 var hearts_list : Array[TextureRect]
-var health = 5
+var health = 1
 const COIN_ATLAS_COORDS = Vector2i(17, 8) # update this if needed
 const GOAL_ATLAS_COORDS = Vector2i(14, 9) # update this if needed
 const ENEMY_ATLAS_COORDS = Vector2i(12, 7) #source 2
@@ -52,18 +53,19 @@ func unload_old_level() -> void:
 	for ship_part in ship_parts_container.get_children():
 		ship_part.queue_free()
 	
-func _ready() -> void:		
+func _ready() -> void:			
 	message_label = $HUD.find_child("MessageLabel") as Label
 	score_label = $HUD.find_child("ScoreLabel") as Label
 	init_level(currentlevel) # load level 1 at the beginning
 	$Killzone.player_damaged.connect(_on_killzone_player_killed)
-	#boss.find_child("Killzone").player_damaged.connect(_on_killzone_player_killed)
-	#boss.player_catched.connect(_on_killzone_player_killed)	
+	boss.player_catched.connect(_on_killzone_player_killed)	
 	#show health_bar
 	for child in hearts_parent.get_children():
-		hearts_list.append(child)
+		hearts_list.append(child)		
+	update_heart_display()
 	levelup_dialog.continue_button_pressed.connect(on_levelup_button_pressed)
-
+	Highscores.init()
+	
 func spawm_inst(x, y, level):
 	var id = randi() % len(segments)
 	id += 1
@@ -150,7 +152,8 @@ func on_goal_reached() -> void:
 		get_tree().paused = true
 	else:
 		message_label.text = "Congrats! Well done!"
-		message_label.visible = true
+		message_label.visible = true		
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
 	
 func on_food_obtained() -> void:
 	health += 1
@@ -158,7 +161,7 @@ func on_food_obtained() -> void:
 
 func on_gear_obtained() ->void:	
 	score += 1	
-	if score >=2:
+	if score >=3:
 		score = 0
 		on_goal_reached()
 		print("collet gears and move to next level")		
@@ -168,17 +171,18 @@ func on_gear_obtained() ->void:
 func _on_killzone_player_killed() -> void:
 	print("health: ", health)	
 	player.animated_sprite.play("hit")
-	if health >1:
+	if health >=1:
 		health  -=1
 		update_heart_display()
 		#shall move back the 
-	elif health <=1:		
+	elif health <1:		
 		health  = 0
 		update_heart_display()
 		player.animated_sprite.play("hit")
-		get_tree().paused = true # pause the game
-		message_label.text = "Oh no >_< Game over!"
-		message_label.visible = true
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		#get_tree().paused = true # pause the game
+		#message_label.text = "Oh no >_< Game over!"
+		#message_label.visible = true
 #	$Sounds/DisappearSound.play()
 
 func update_heart_display():

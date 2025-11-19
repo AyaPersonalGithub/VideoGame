@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfg71tywm5hcb"]
+
+[ext_resource type="Script" uid="uid://c7ml2yp2c2igc" path="res://scripts/game_over.gd" id="1_racf3"]
+[ext_resource type="VideoStream" uid="uid://belkc5m44vw42" path="res://assets/UI/dead.ogv" id="1_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://cahpb6ftnr7s3" path="res://assets/UI/Double/button_red.png" id="2_racf3"]
+[ext_resource type="Texture2D" uid="uid://dxs0iairw2sg6" path="res://assets/UI/Double/button_grey.png" id="3_7m3ot"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_racf3")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 656.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_tbwuq")
+autoplay = true
+expand = true
+loop = true
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 192.0
+offset_top = 448.0
+offset_right = 392.0
+offset_bottom = 648.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+icon = ExtResource("2_racf3")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EndButton" type="Button" parent="."]
+offset_left = 768.0
+offset_top = 448.0
+offset_right = 968.0
+offset_bottom = 648.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+icon = ExtResource("3_7m3ot")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]

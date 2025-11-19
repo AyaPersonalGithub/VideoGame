@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://k4dhs2bqcruq"]
+
+[ext_resource type="Texture2D" uid="uid://cd5sir3c1s4b2" path="res://assets/UI/startImage.jpg" id="1_2b7j8"]
+[ext_resource type="Script" uid="uid://nmun73wpk6eq" path="res://scripts/story_intro.gd" id="1_pdsmg"]
+
+[node name="StoryIntro" type="Node2D"]
+script = ExtResource("1_pdsmg")
+in_time = null
+fade_in_time = null
+pause_time = null
+fade_out_time = null
+out_time = null
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1112.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.017732391, 0.017732391, 0.01773239, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1536.0
+offset_bottom = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("1_2b7j8")
+stretch_mode = 4

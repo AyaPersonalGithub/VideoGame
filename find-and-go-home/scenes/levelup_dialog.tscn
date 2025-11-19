@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://2h8wls1u7c3k"]
+[gd_scene load_steps=5 format=3 uid="uid://2h8wls1u7c3k"]
 
 [ext_resource type="Script" uid="uid://bwmop11a1xvw2" path="res://scripts/levelup_dialog.gd" id="1_gxg2q"]
-[ext_resource type="Texture2D" uid="uid://dsawgaew1eued" path="res://scenes/levels/panel_brown.png" id="1_pkx4w"]
 [ext_resource type="Texture2D" uid="uid://ck64v3nsqcxy5" path="res://assets/UI/Double/button_brown.png" id="2_36pgd"]
-
-[sub_resource type="Theme" id="Theme_0a082"]
+[ext_resource type="Texture2D" uid="uid://c8lh0qu1qbmyn" path="res://assets/UI/Yellow/Double/button_square_depth_flat.png" id="2_gxg2q"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_tmfn4"]
 
@@ -30,10 +28,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="image" type="TextureRect" parent="MarginContainer"]
-layout_mode = 2
-theme = SubResource("Theme_0a082")
-texture = ExtResource("1_pkx4w")
+[node name="ButtonSquareDepthFlat" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(511.99997, 296)
+scale = Vector2(8.437499, 4.46875)
+texture = ExtResource("2_gxg2q")
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 5
