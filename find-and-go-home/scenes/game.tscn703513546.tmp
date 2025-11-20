@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://f6ky3pyyj0ir"]
+[gd_scene load_steps=14 format=3 uid="uid://f6ky3pyyj0ir"]
 
 [ext_resource type="Script" uid="uid://ci2avfxq2u1u2" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bjyd0866r8jcp" path="res://scenes/player.tscn" id="2_lnu2h"]
@@ -11,13 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bfb2f5ad6i8ou" path="res://scenes/killzone.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://2h8wls1u7c3k" path="res://scenes/levelup_dialog.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://clcfumb7xct58" path="res://scenes/main_menu.tscn" id="9_0tnpc"]
-[ext_resource type="AudioStream" uid="uid://c6f4ll22mpv4s" path="res://assets/Sounds/sfx_jump.ogg" id="12_trtic"]
-[ext_resource type="AudioStream" uid="uid://cfx2jtw5lfbxc" path="res://assets/Sounds/sfx_gem.ogg" id="13_ir15t"]
-[ext_resource type="AudioStream" uid="uid://dsv8pdf2aflo8" path="res://assets/Sounds/sfx_coin.ogg" id="14_ca42v"]
-[ext_resource type="AudioStream" uid="uid://drwm8sx2ommtc" path="res://assets/Sounds/sfx_hurt.ogg" id="15_ir15t"]
-[ext_resource type="AudioStream" uid="uid://2a7x72f4sk6l" path="res://assets/Sounds/levelup.mp3" id="16_ca42v"]
-[ext_resource type="Texture2D" uid="uid://ws3qva8tgpxa" path="res://assets/Sprites/Backgrounds/Double/background_clouds.png" id="17_ssvqc"]
-[ext_resource type="Texture2D" uid="uid://crsmvs7836nki" path="res://assets/Sprites/Backgrounds/Extra/backgroundColorGrass.png" id="18_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://dptic470yyhkw" path="res://scenes/highscores.tscn" id="12_dinhu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 distance = -148.0
@@ -40,10 +34,10 @@ position = Vector2(296, -88)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -96)
-limit_left = -10001159
-limit_top = -10000002
-limit_right = 9998841
-limit_bottom = 603
+limit_left = -10001171
+limit_top = -10000005
+limit_right = 9998829
+limit_bottom = 600
 limit_smoothed = true
 position_smoothing_enabled = true
 
@@ -78,43 +72,4 @@ scroll_offset = Vector2(296, -24)
 process_mode = 3
 visible = false
 
-[node name="Sounds" type="Node" parent="."]
-
-[node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("12_trtic")
-
-[node name="FoodSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("13_ir15t")
-
-[node name="GearSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("14_ca42v")
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("15_ir15t")
-
-[node name="LevelUpSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("16_ca42v")
-
-[node name="Backgraound" type="Node" parent="."]
-
-[node name="Background_1" type="Parallax2D" parent="Backgraound"]
-z_index = -99
-scroll_scale = Vector2(0.9, 1)
-repeat_size = Vector2(512, 0)
-autoscroll = Vector2(16, 0)
-repeat_times = 10
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgraound/Background_1"]
-position = Vector2(304, -664)
-texture = ExtResource("17_ssvqc")
-
-[node name="MountainBackground_1" type="Parallax2D" parent="Backgraound"]
-z_index = -98
-scroll_scale = Vector2(0.8, 1)
-repeat_size = Vector2(512, 0)
-autoscroll = Vector2(1.6, 1.6)
-repeat_times = 10
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgraound/MountainBackground_1"]
-position = Vector2(256, 56)
-texture = ExtResource("18_ssvqc")
+[node name="Highscores" parent="." instance=ExtResource("12_dinhu")]
