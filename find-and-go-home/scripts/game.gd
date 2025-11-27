@@ -10,6 +10,8 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 var enemy2_scene = preload("res://scenes/enemy_2.tscn")
 var ship_part_scene = preload("res://scenes/ship_part.tscn")
 var game_over_scene = preload("res://scenes/game_over.tscn")
+var background_1 = preload("res://assets/Sprites/Backgrounds/Extra/background1.png")
+var background_2 = preload("res://assets/Sprites/Backgrounds/Extra/background2.PNG")
 var tile_map_layer
 var goal
 var segments = [
@@ -30,7 +32,7 @@ var levelSegmentLength = 3200
 @onready var levelup_dialog =$LevelupDialog
 
 var hearts_list : Array[TextureRect]
-var health = 1
+var health = 5
 const COIN_ATLAS_COORDS = Vector2i(17, 8) # update this if needed
 const GOAL_ATLAS_COORDS = Vector2i(14, 9) # update this if needed
 const ENEMY_ATLAS_COORDS = Vector2i(12, 7) #source 2
@@ -51,7 +53,7 @@ func unload_old_level() -> void:
 	for enemy in enemy_container.get_children():
 		enemy.queue_free()
 	for ship_part in ship_parts_container.get_children():
-		ship_part.queue_free()
+		ship_part.queue_free()	
 	
 func _ready() -> void:			
 	message_label = $HUD.find_child("MessageLabel") as Label
@@ -69,11 +71,12 @@ func _ready() -> void:
 func spawm_inst(x, y, level):
 	var id = randi() % len(segments)
 	id += 1
-	print(" id: ", id, "level: ",level)
 	var segment = load("res://scenes/levels/level%s_%s.tscn" %[level, id])
 	#for segment in range (segments.size()):		
 	var inst = segment.instantiate()
 	level_container.add_child(inst)
+	
+	print(" id: ", id, " level: ",level, " child count",level_container.get_child_count())
 	inst.global_position = Vector2(x,0)
 	#print("position of scene:",inst.global_position)
 	#load cell of food and gears 
@@ -109,7 +112,7 @@ func spawm_inst(x, y, level):
 			new_ship_part.position = ground_map_layer.to_global(ground_map_layer.map_to_local(cell))
 			new_ship_part.gear_obtained.connect(on_gear_obtained)
 			ground_map_layer.set_cell(cell, -1)	
-			print("load gear")
+			#print("load gear")
 		
 func init_level(level: int) -> void:
 	# unload the old level
@@ -118,9 +121,15 @@ func init_level(level: int) -> void:
 	player.position = Vector2(0, 0)
 	boss.position = Vector2(-200, -200)
 	score = 0
+	score_label.text = "Score: " + str(score)
+	#spawm_inst(-levelSegmentLength,0,currentlevel)
 	spawm_inst(0,0,currentlevel)
-	spawm_inst(levelSegmentLength,0,currentlevel)
-
+	spawm_inst(levelSegmentLength,0,currentlevel)		
+	var newBackground = load("res://assets/Sprites/Backgrounds/Extra/background%d.png" %currentlevel)
+	$Backgraound/background/texture.texture = newBackground
+	var newBackgroundDeco = load("res://assets/Sprites/Backgrounds/Extra/flyDeco%d.png" %currentlevel)
+	$Backgraound/backgroundDeco/texture.texture = newBackgroundDeco
+	
 func _physics_process(delta: float) -> void:
 	for level in level_container.get_children():
 		level.position.x -=map_move_speed * delta
@@ -146,16 +155,17 @@ func _physics_process(delta: float) -> void:
 	
 func on_goal_reached() -> void:
 	if currentlevel < 3:
-		currentlevel += 1
-		#init_level(currentlevel)				
+		currentlevel += 1			
 		Highscores.update_highscore(currentlevel, score)
 		levelup_dialog.visible = true
 		get_tree().paused = true
 	else:
-		message_label.text = "Congrats! Well done!"
-		message_label.visible = true		
+		#message_label.text = "Congrats! Well done!"
+		#message_label.visible = true		
 		Highscores.update_highscore(currentlevel, score)
 		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		unload_old_level()
+		print("Win")
 	
 func on_food_obtained() -> void:
 	health += 1
@@ -165,13 +175,14 @@ func on_food_obtained() -> void:
 func on_gear_obtained() ->void:	
 	score += 1		
 	$Sounds/GearSound.play()
+	score_label.text = "Score: " + str(score)
+	print("Score: " + str(score)+ " Level: "+str(currentlevel))
 	if score >=3:
 		score = 0
-		on_goal_reached()		
+		score_label.text = "Score: " + str(score)
+		on_goal_reached()			
 		$Sounds/LevelUpSound.play()
-		print("collet gears and move to next level")		
-	score_label.text = "Score: " + str(score)
-	print("Score: " + str(score))
+		print("collet gears and move to next level")	
 	
 func _on_killzone_player_killed() -> void:
 	print("health: ", health)		
@@ -186,6 +197,7 @@ func _on_killzone_player_killed() -> void:
 		update_heart_display()
 		player.animated_sprite.play("hit")
 		Highscores.update_highscore(currentlevel, score)
+		unload_old_level()
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 		#get_tree().paused = true # pause the game
 		#message_label.text = "Oh no >_< Game over!"

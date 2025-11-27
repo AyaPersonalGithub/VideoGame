@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crsmvs7836nki"
-path="res://.godot/imported/backgroundColorGrass.png-0f03e1bbbe3a466aa4232e49859aa690.ctex"
+uid="uid://dig5psmdy80yf"
+path="res://.godot/imported/flyDeco2.png-5ae720959823f92f9994e5da34366141.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/Backgrounds/Extra/backgroundColorGrass.png"
-dest_files=["res://.godot/imported/backgroundColorGrass.png-0f03e1bbbe3a466aa4232e49859aa690.ctex"]
+source_file="res://assets/Sprites/Backgrounds/Extra/flyDeco2.png"
+dest_files=["res://.godot/imported/flyDeco2.png-5ae720959823f92f9994e5da34366141.ctex"]
 
 [params]
 

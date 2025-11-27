@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dsv8pdf2aflo8" path="res://assets/Sounds/sfx_coin.ogg" id="14_ca42v"]
 [ext_resource type="AudioStream" uid="uid://drwm8sx2ommtc" path="res://assets/Sounds/sfx_hurt.ogg" id="15_ir15t"]
 [ext_resource type="AudioStream" uid="uid://2a7x72f4sk6l" path="res://assets/Sounds/levelup.mp3" id="16_ca42v"]
-[ext_resource type="Texture2D" uid="uid://8psvl85gdy8a" path="res://assets/Sprites/Backgrounds/Extra/flyDeco1.png" id="18_264po"]
+[ext_resource type="Texture2D" uid="uid://dbmc4qkp6yd2m" path="res://assets/Sprites/Backgrounds/Extra/cloud.PNG" id="17_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://dc4vefm60rc1m" path="res://assets/Sprites/Backgrounds/Extra/background1.png" id="18_ssvqc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
@@ -101,31 +101,23 @@ stream = ExtResource("16_ca42v")
 z_index = -99
 scroll_scale = Vector2(0.8, 1)
 scroll_offset = Vector2(0, -192)
-repeat_size = Vector2(2304, 0)
+repeat_size = Vector2(512, 0)
 autoscroll = Vector2(1.6, 1.6)
 repeat_times = 10
 
-[node name="texture" type="TextureRect" parent="Backgraound/background"]
-offset_top = -776.0
-offset_right = 1536.0
-offset_bottom = 248.0
-scale = Vector2(1.5, 1.5)
+[node name="Sprite2D" type="Sprite2D" parent="Backgraound/background"]
+position = Vector2(512, 0)
+scale = Vector2(1, 1.5)
 texture = ExtResource("18_ssvqc")
 
 [node name="backgroundDeco" type="Parallax2D" parent="Backgraound"]
 z_index = -98
-scroll_offset = Vector2(0, -8)
-repeat_size = Vector2(1024, 0)
-autoscroll = Vector2(50, 20)
+scroll_scale = Vector2(0.8, 1.2)
+repeat_size = Vector2(512, 0)
+autoscroll = Vector2(16, 0)
 repeat_times = 10
-limit_begin = Vector2(-10000000, -600)
-limit_end = Vector2(10000000, -600)
 
-[node name="texture" type="TextureRect" parent="Backgraound/backgroundDeco"]
-offset_left = 400.0
-offset_top = -768.0
-offset_right = 2400.0
-offset_bottom = 1232.0
+[node name="Sprite2D" type="Sprite2D" parent="Backgraound/backgroundDeco"]
+position = Vector2(240, -616)
 scale = Vector2(0.2, 0.172)
-texture = ExtResource("18_264po")
-expand_mode = 1
+texture = ExtResource("17_ssvqc")
