@@ -14,7 +14,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1152.0
-offset_bottom = 648.0
+offset_bottom = 656.0
 grow_horizontal = 2
 grow_vertical = 2
 stream = ExtResource("1_tbwuq")
@@ -50,25 +50,13 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="HighestScore" type="Label" parent="."]
-offset_top = 128.0
-offset_right = 1152.0
-offset_bottom = 608.0
-theme_override_colors/font_color = Color(0.6413816, 0.65409267, 0.8673919, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 20
-text = "0"
+offset_right = 384.0
+offset_bottom = 488.0
+theme_override_font_sizes/font_size = 48
+text = "Game Over!"
 horizontal_alignment = 1
 
 [node name="Highscores" parent="." instance=ExtResource("5_7m3ot")]
-
-[node name="Label" type="Label" parent="."]
-offset_right = 1152.0
-offset_bottom = 192.0
-theme_override_colors/font_color = Color(0.75541836, 0.75158757, 7.70092e-07, 1)
-theme_override_font_sizes/font_size = 45
-text = "Game Over!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]

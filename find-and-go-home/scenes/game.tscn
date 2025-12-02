@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://f6ky3pyyj0ir"]
+[gd_scene load_steps=21 format=3 uid="uid://f6ky3pyyj0ir"]
 
 [ext_resource type="Script" uid="uid://ci2avfxq2u1u2" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bjyd0866r8jcp" path="res://scenes/player.tscn" id="2_lnu2h"]
@@ -16,11 +16,12 @@
 [ext_resource type="AudioStream" uid="uid://dsv8pdf2aflo8" path="res://assets/Sounds/sfx_coin.ogg" id="14_ca42v"]
 [ext_resource type="AudioStream" uid="uid://drwm8sx2ommtc" path="res://assets/Sounds/sfx_hurt.ogg" id="15_ir15t"]
 [ext_resource type="AudioStream" uid="uid://2a7x72f4sk6l" path="res://assets/Sounds/levelup.mp3" id="16_ca42v"]
+[ext_resource type="AudioStream" uid="uid://c701nps0aa7gv" path="res://assets/Sounds/sfx_congrats.wav" id="17_264po"]
 [ext_resource type="Texture2D" uid="uid://8psvl85gdy8a" path="res://assets/Sprites/Backgrounds/Extra/flyDeco1.png" id="18_264po"]
 [ext_resource type="Texture2D" uid="uid://dc4vefm60rc1m" path="res://assets/Sprites/Backgrounds/Extra/background1.png" id="18_ssvqc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
-distance = -148.0
+distance = -88.0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_yqjtg")
@@ -60,6 +61,7 @@ position = Vector2(104, -280)
 position = Vector2(760, 496)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(8, -264)
 shape = SubResource("WorldBoundaryShape2D_p57ef")
 
 [node name="Levels" parent="." instance=ExtResource("5_iywne")]
@@ -95,6 +97,9 @@ stream = ExtResource("15_ir15t")
 [node name="LevelUpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("16_ca42v")
 
+[node name="WinSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("17_264po")
+
 [node name="Backgraound" type="Node" parent="."]
 
 [node name="background" type="Parallax2D" parent="Backgraound"]
@@ -106,9 +111,9 @@ autoscroll = Vector2(1.6, 1.6)
 repeat_times = 10
 
 [node name="texture" type="TextureRect" parent="Backgraound/background"]
-offset_top = -776.0
+offset_top = -904.00006
 offset_right = 1536.0
-offset_bottom = 248.0
+offset_bottom = 119.99994
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("18_ssvqc")
 

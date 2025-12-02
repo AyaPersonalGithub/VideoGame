@@ -20,6 +20,8 @@ var segments = [
 	preload("res://scenes/levels/level1_3.tscn")
 ]
 var levelSegmentLength = 3200
+var startGearCount = 3
+var targetGearCount = 5
 @onready var food_container = $Foods
 @onready var enemy_container = $Enemies
 @onready var player = $Player
@@ -60,7 +62,7 @@ func _ready() -> void:
 	score_label = $HUD.find_child("ScoreLabel") as Label
 	init_level(currentlevel) # load level 1 at the beginning
 	$Killzone.player_damaged.connect(_on_killzone_player_killed)
-	boss.player_catched.connect(_on_killzone_player_killed)	
+	#boss.player_catched.connect(_on_killzone_player_killed)	
 	#show health_bar
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)		
@@ -120,8 +122,9 @@ func init_level(level: int) -> void:
 	# reset player positiond
 	player.position = Vector2(0, 0)
 	boss.position = Vector2(-200, -200)
+	targetGearCount = int(startGearCount +2*level)
 	score = 0
-	score_label.text = "Score: " + str(score)
+	score_label.text = str(score) + "/"+str(targetGearCount)
 	#spawm_inst(-levelSegmentLength,0,currentlevel)
 	spawm_inst(0,0,currentlevel)
 	spawm_inst(levelSegmentLength,0,currentlevel)		
@@ -156,30 +159,33 @@ func _physics_process(delta: float) -> void:
 func on_goal_reached() -> void:
 	if currentlevel < 3:
 		currentlevel += 1			
-		Highscores.update_highscore(currentlevel, score)
+		score = 0
+		score_label.text = "Score: " + str(score)
 		levelup_dialog.visible = true
 		get_tree().paused = true
 	else:
 		#message_label.text = "Congrats! Well done!"
 		#message_label.visible = true		
 		Highscores.update_highscore(currentlevel, score)
+		score = 0
+		score_label.text = "Score: " + str(score)
 		get_tree().change_scene_to_file("res://scenes/win.tscn")
 		unload_old_level()
 		print("Win")
+		$Sounds/WinSound.play()
 	
 func on_food_obtained() -> void:
-	health += 1
+	if health < 5:
+		health += 1
 	$Sounds/FoodSound.play()
 	update_heart_display()
 
 func on_gear_obtained() ->void:	
 	score += 1		
 	$Sounds/GearSound.play()
-	score_label.text = "Score: " + str(score)
+	score_label.text =  str(score) + "/"+str(targetGearCount)
 	print("Score: " + str(score)+ " Level: "+str(currentlevel))
-	if score >=3:
-		score = 0
-		score_label.text = "Score: " + str(score)
+	if score >=targetGearCount:
 		on_goal_reached()			
 		$Sounds/LevelUpSound.play()
 		print("collet gears and move to next level")	
@@ -198,6 +204,7 @@ func _on_killzone_player_killed() -> void:
 		player.animated_sprite.play("hit")
 		Highscores.update_highscore(currentlevel, score)
 		unload_old_level()
+		print("update game over")	
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 		#get_tree().paused = true # pause the game
 		#message_label.text = "Oh no >_< Game over!"

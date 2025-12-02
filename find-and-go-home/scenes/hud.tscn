@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bro12nktdbewp" path="res://scripts/hud.gd" id="1_5pdws"]
 [ext_resource type="Texture2D" uid="uid://doptvle4eonlt" path="res://assets/Sprites/Tiles/Default/hud_heart_empty.png" id="1_5ysmq"]
-[ext_resource type="Texture2D" uid="uid://dr0bya5mvrg0d" path="res://assets/Sprites/Tiles/Default/heart.png" id="1_ahhtf"]
-[ext_resource type="Texture2D" uid="uid://o0wmmij8p7i7" path="res://assets/Sprites/Tiles/Default/hud_heart.png" id="3_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://crbse7i0bgvbg" path="res://assets/Sprites/Tiles/carrot.png" id="3_5pdws"]
 [ext_resource type="Texture2D" uid="uid://dsawgaew1eued" path="res://scenes/levels/panel_brown.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://cahpb6ftnr7s3" path="res://assets/UI/Double/button_red.png" id="5_047uy"]
 [ext_resource type="Texture2D" uid="uid://dxs0iairw2sg6" path="res://assets/UI/Double/button_grey.png" id="6_047uy"]
+[ext_resource type="Texture2D" uid="uid://hal6ekms74mf" path="res://assets/Sprites/Tiles/gear.png" id="8_hd3ao"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oo0fn"]
 animations = [{
@@ -20,10 +20,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ahhtf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_6fi6k")
+"texture": ExtResource("3_5pdws")
 }],
 "loop": true,
 "name": &"full",
@@ -39,13 +36,15 @@ offset_top = 8.0
 offset_right = 112.0
 offset_bottom = 58.0
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 55
+theme_override_constants/margin_top = 58
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.8390432, 0.34760284, 0.4822191, 1)
+theme_override_colors/font_shadow_color = Color(0.6858229, 0.58950126, 0.1543886, 0)
+theme_override_font_sizes/font_size = 40
 text = "0"
 
 [node name="MessageLabel" type="Label" parent="."]
@@ -65,6 +64,7 @@ offset_left = 80.0
 offset_top = 16.0
 offset_right = 164.0
 offset_bottom = 50.0
+theme_override_constants/separation = 16
 
 [node name="hearts" type="TextureRect" parent="Heart_bar"]
 custom_minimum_size = Vector2(40, 0)
@@ -72,9 +72,11 @@ layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts"]
 position = Vector2(-48, 16)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
+frame_progress = 0.90233314
 
 [node name="hearts2" type="TextureRect" parent="Heart_bar"]
 custom_minimum_size = Vector2(40, 0)
@@ -82,6 +84,7 @@ layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts2"]
 position = Vector2(-48, 16)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
@@ -92,6 +95,7 @@ layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts3"]
 position = Vector2(-48, 16)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
@@ -102,6 +106,7 @@ layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts4"]
 position = Vector2(-48, 16)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
@@ -112,6 +117,7 @@ layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart_bar/hearts5"]
 position = Vector2(-48, 16)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oo0fn")
 animation = &"full"
 autoplay = "full"
@@ -196,6 +202,13 @@ icon = ExtResource("6_047uy")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 4.0
+offset_top = 64.0
+offset_right = 68.0
+offset_bottom = 128.0
+texture = ExtResource("8_hd3ao")
 
 [connection signal="pressed" from="Quit/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="Quit/NoButton" to="." method="_on_no_button_pressed"]

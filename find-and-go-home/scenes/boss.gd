@@ -15,14 +15,13 @@ func _physics_process(delta: float) -> void:
 	if player_chase:
 		if player != null:
 			var player_pos = player.global_position
-			#print("player position: ",player_pos, "enemy position: ",position)
 			position += (player_pos - position).normalized() * SPEED
-		else:
-			print("cannot find player")
+	else:
+		position.x += SPEED *delta
 			
 func _on_detect_area_body_entered(body: Node2D) -> void:
 	if body is Player:
-		#find player and chase
+		#find player and chase		
 		player_chase = true
 
 func _on_detect_area_body_exited(body: Node2D) -> void:

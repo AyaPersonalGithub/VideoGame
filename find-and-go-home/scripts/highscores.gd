@@ -12,12 +12,12 @@ func init():
 	print(get_highscore_table_string())
 	
 func get_highscore_table_string () -> String:
-	var s = "Highscore Table:" + "\n"
-	s = s + "===========================" + "\n"
+	var s = "Highest score:" + "\n"
+	s = s + "+++++++++++++++++++++++++++++++++++++++++" + "\n"
 	if highscores:
 		for i in range(highscores.size()):
 			s = s + str(i+1) +". level: " + str(highscores[i][0]) + " score: " + str(highscores[i][1]) + " Time: "+ Time.get_datetime_string_from_unix_time(highscores[i][2]) + "\n"
-		s = s + "==========================="
+		s = s + "+++++++++++++++++++++++++++++++++++++++++"
 	return s
 
 func update_highscore(level, new_score):
