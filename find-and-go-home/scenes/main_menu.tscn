@@ -34,4 +34,32 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -555.0
+offset_top = -298.0
+offset_right = 216.0
+offset_bottom = 270.0
+text = "Little bunny has crash-landed on a strange planet after its UFO broke. 
+To escape, collect enough gears to repair the UFO and leave the planet!
+
+Use the keyboard to move:
+A = Move Left
+D = Move Right
+W = Jump
+
+Health (Hearts)
+- You start with 5 hearts.
+- Getting too close to the BOSS or other creatures will damage the bunny and deduct hearts.
+- If your hearts run out, you lose the level.
+
+Healing Items
+- Collect carrots during the level to restore hearts (recover hearts).
+
+
+
+
+Winning the Level
+- Explore the planet and collect gears.
+- Once you have enough gears, you can fix the broken UFO and help bunny to go back home!"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
