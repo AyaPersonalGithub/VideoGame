@@ -122,6 +122,12 @@ func init_level(level: int) -> void:
 	# reset player positiond
 	player.position = Vector2(0, 0)
 	boss.position = Vector2(-200, -200)
+	if currentlevel == 1:
+		boss.SPEED = 3
+	elif currentlevel == 2:
+		boss.SPEED = 4
+	else:
+		boss.SPEED = 5
 	targetGearCount = int(startGearCount +2*level)
 	score = 0
 	score_label.text = str(score) + "/"+str(targetGearCount)

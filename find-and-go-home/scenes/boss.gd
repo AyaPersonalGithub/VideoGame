@@ -1,5 +1,5 @@
 extends Node2D
-const SPEED = 3
+var SPEED = 3
 @onready var player = $"../Player"
 @onready var timer: Timer = $Timer # Get the Timer node
 signal player_catched
