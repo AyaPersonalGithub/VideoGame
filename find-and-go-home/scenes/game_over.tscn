@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfg71tywm5hcb"]
+[gd_scene load_steps=6 format=3 uid="uid://dfg71tywm5hcb"]
 
 [ext_resource type="Script" uid="uid://c7ml2yp2c2igc" path="res://scripts/game_over.gd" id="1_racf3"]
 [ext_resource type="VideoStream" uid="uid://belkc5m44vw42" path="res://assets/UI/dead.ogv" id="1_tbwuq"]
 [ext_resource type="Texture2D" uid="uid://cahpb6ftnr7s3" path="res://assets/UI/Double/button_red.png" id="2_racf3"]
 [ext_resource type="Texture2D" uid="uid://dxs0iairw2sg6" path="res://assets/UI/Double/button_grey.png" id="3_7m3ot"]
+[ext_resource type="Script" uid="uid://clfa662y273po" path="res://scripts/label.gd" id="5_7m3ot"]
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource("1_racf3")
@@ -47,6 +48,14 @@ icon = ExtResource("3_7m3ot")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 342.0
+offset_top = 46.0
+offset_right = 803.0
+offset_bottom = 295.0
+theme_override_font_sizes/font_size = 20
+script = ExtResource("5_7m3ot")
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
