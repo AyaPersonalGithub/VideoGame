@@ -55,7 +55,7 @@ process_mode = 3
 
 [node name="Boss" parent="." instance=ExtResource("7_gee14")]
 z_index = 9
-position = Vector2(104, -280)
+position = Vector2(-200, -280)
 
 [node name="Killzone" parent="." instance=ExtResource("7_u5sy4")]
 position = Vector2(760, 496)

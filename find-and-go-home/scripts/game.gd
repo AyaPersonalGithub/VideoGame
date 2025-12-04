@@ -121,7 +121,7 @@ func init_level(level: int) -> void:
 	unload_old_level()
 	# reset player positiond
 	player.position = Vector2(0, 0)
-	boss.position = Vector2(-200, -200)
+	boss.position = Vector2(-400, -400)
 	if currentlevel == 1:
 		boss.SPEED = 3
 	elif currentlevel == 2:

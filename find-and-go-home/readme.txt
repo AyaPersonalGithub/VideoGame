@@ -11,3 +11,5 @@ Acknowledgement:
 5. https://kenney.nl/assets/jumper-pack		License:Creative Commons CC0
 6. https://kenney.nl/assets/platformer-art-deluxe	License:Creative Commons CC0
 7. https://freesound.org/people/shinephoenixstormcrow/sounds/337049/ 
+8. https://freesound.org/people/Mrthenoronha/sounds/528717/
+9. https://www.youtube.com/watch?v=0amclwspR0w
