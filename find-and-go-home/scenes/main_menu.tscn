@@ -60,7 +60,6 @@ Healing Items
 
 
 Winning the Level
-- Explore the planet and collect gears.
-- Once you have enough gears, you can fix the broken UFO and help bunny to go back home!"
+- Explore the planet and collect at least 3 gears for each levels to help bunny to go back home."
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
