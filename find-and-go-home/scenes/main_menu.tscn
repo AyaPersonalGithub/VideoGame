@@ -34,4 +34,33 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -557.0
+offset_top = -293.0
+offset_right = 439.0
+offset_bottom = 216.0
+text = "Little bunny has crash-landed on a strange planet after its UFO broke. 
+To escape, collect enough gears for each levels to repair the UFO and leave the planet!
+In level 3, collect as much gears as you can! Good Luck~
+
+Use the keyboard to move:
+A = Move Left
+D = Move Right
+W / Space = Jump
+
+Health (Carrots)
+- You start with 5 carrots
+- Getting too close to the BOSS or other creatures will damage the bunny and deduct carrots
+- If your carrots run out, you lose the level
+
+Healing Items
+- Collect carrots during the level to recover health
+
+
+
+
+Winning the Level
+- Explore the planet and collect at enough gears for each levels to help bunny to go back home"
+fit_content = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

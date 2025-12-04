@@ -57,12 +57,12 @@ func unload_old_level() -> void:
 	for ship_part in ship_parts_container.get_children():
 		ship_part.queue_free()	
 	
-func _ready() -> void:			
+func _ready() -> void:
 	message_label = $HUD.find_child("MessageLabel") as Label
 	score_label = $HUD.find_child("ScoreLabel") as Label
 	init_level(currentlevel) # load level 1 at the beginning
 	$Killzone.player_damaged.connect(_on_killzone_player_killed)
-	#boss.player_catched.connect(_on_killzone_player_killed)	
+	boss.player_catched.connect(_on_killzone_player_killed)	
 	#show health_bar
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)		
@@ -158,21 +158,11 @@ func _physics_process(delta: float) -> void:
 	
 func on_goal_reached() -> void:
 	if currentlevel < 3:
-		currentlevel += 1			
+		currentlevel += 1	
 		score = 0
 		score_label.text = "Score: " + str(score)
 		levelup_dialog.visible = true
 		get_tree().paused = true
-	else:
-		#message_label.text = "Congrats! Well done!"
-		#message_label.visible = true		
-		Highscores.update_highscore(currentlevel, score)
-		score = 0
-		score_label.text = "Score: " + str(score)
-		get_tree().change_scene_to_file("res://scenes/win.tscn")
-		unload_old_level()
-		print("Win")
-		$Sounds/WinSound.play()
 	
 func on_food_obtained() -> void:
 	if health < 5:
@@ -198,7 +188,7 @@ func _on_killzone_player_killed() -> void:
 		health  -=1
 		update_heart_display()
 		#shall move back the 
-	elif health <=1:		
+	elif health <=1 && score < 9:		
 		health  = 0
 		update_heart_display()
 		player.animated_sprite.play("hit")
@@ -206,6 +196,14 @@ func _on_killzone_player_killed() -> void:
 		unload_old_level()
 		print("update game over")	
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	elif score >= 9:
+		Highscores.update_highscore(currentlevel, score)
+		score = 0
+		score_label.text = "Score: " + str(score)
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		unload_old_level()
+		print("Win")
+		$Sounds/WinSound.play()
 		#get_tree().paused = true # pause the game
 		#message_label.text = "Oh no >_< Game over!"
 		#message_label.visible = true
