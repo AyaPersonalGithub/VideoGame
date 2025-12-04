@@ -154,18 +154,10 @@ func _physics_process(delta: float) -> void:
 
 	
 func on_goal_reached() -> void:
-	if currentlevel < 3:
-		currentlevel += 1			
-		Highscores.update_highscore(currentlevel, score)
-		levelup_dialog.visible = true
-		get_tree().paused = true
-	else:
-		#message_label.text = "Congrats! Well done!"
-		#message_label.visible = true		
-		Highscores.update_highscore(currentlevel, score)
-		get_tree().change_scene_to_file("res://scenes/win.tscn")
-		unload_old_level()
-		print("Win")
+	currentlevel += 1			
+	Highscores.update_highscore(currentlevel, score)
+	levelup_dialog.visible = true
+	get_tree().paused = true
 	
 func on_food_obtained() -> void:
 	health += 1
@@ -177,10 +169,10 @@ func on_gear_obtained() ->void:
 	$Sounds/GearSound.play()
 	score_label.text = "Score: " + str(score)
 	print("Score: " + str(score)+ " Level: "+str(currentlevel))
-	if score >=3:
+	if score >=3 && currentlevel < 3:
 		score = 0
 		score_label.text = "Score: " + str(score)
-		on_goal_reached()			
+		on_goal_reached()
 		$Sounds/LevelUpSound.play()
 		print("collet gears and move to next level")	
 	
@@ -192,13 +184,18 @@ func _on_killzone_player_killed() -> void:
 		health  -=1
 		update_heart_display()
 		#shall move back the 
-	elif health <=1:		
+	elif health <=1 && score < 3:		
 		health  = 0
 		update_heart_display()
 		player.animated_sprite.play("hit")
 		Highscores.update_highscore(currentlevel, score)
 		unload_old_level()
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	elif score >= 3:
+		Highscores.update_highscore(currentlevel, score)
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		unload_old_level()
+		print("Win")
 		#get_tree().paused = true # pause the game
 		#message_label.text = "Oh no >_< Game over!"
 		#message_label.visible = true
